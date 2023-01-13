@@ -15,13 +15,7 @@ export class AuthController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async test(@Req() req) {
-    const user = req.user;
-
-    console.log(user.email);
-
-    return {
-      message: 'success',
-    };
+  async getUserData(@Req() req) {
+    return req.user;
   }
 }
