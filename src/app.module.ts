@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { PostModule } from './post/post.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { PostModule } from './post/post.module';
     ConfigModule.forRoot(),
     AuthModule,
     PostModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import jwtDecode from 'jwt-decode';
 import { Repository } from 'typeorm';
 import { LoginDto } from './dto/login.dto';
-import { User } from './entities/user.entity';
+import { User } from '../user/entities/user.entity';
 import { AuthPayload } from './interfaces/auth-payload.interface';
 import { UserJwtDecoded } from './interfaces/user-jwtdecoded.interface';
 
