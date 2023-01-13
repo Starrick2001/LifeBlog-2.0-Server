@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -35,4 +36,9 @@ export class User {
     type: 'timestamp',
   })
   updated_at: Date;
+
+  @DeleteDateColumn({
+    type: 'timestamp',
+  })
+  deleted_at: Date;
 }
