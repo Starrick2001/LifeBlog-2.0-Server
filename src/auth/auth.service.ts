@@ -18,7 +18,7 @@ export class AuthService {
 
   async login(loginDto: LoginDto) {
     const userProfile: UserJwtDecoded = jwtDecode(loginDto.credential);
-    let user = await this.findUser(userProfile.email as string);
+    let user = await this.findUser(userProfile.email);
     if (!user) {
       const newUser = this.userRepository.create({
         email: userProfile.email,
