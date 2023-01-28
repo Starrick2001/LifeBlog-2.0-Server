@@ -3,9 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import Avatar from './avatar.entity';
 
 @Entity()
 export class User {
@@ -26,6 +29,10 @@ export class User {
 
   @Column()
   picture: string;
+
+  @OneToOne(() => Avatar)
+  @JoinColumn()
+  public avatar: Avatar;
 
   @CreateDateColumn({
     type: 'timestamp',
