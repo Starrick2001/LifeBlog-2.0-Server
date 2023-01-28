@@ -7,15 +7,15 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { AuthService } from '../auth.service';
-import { User } from '../../user/entities/user.entity';
+import { UserService } from 'src/user/user.service';
+import { IResponseUser } from 'src/user/interfaces/user.interface';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     configService: ConfigService,
-    @Inject(forwardRef(() => AuthService))
-    private authService: AuthService,
+    @Inject(forwardRef(() => UserService))
+    private userService: UserService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -24,10 +24,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any): Promise<User> {
-    const user = await this.authService.findUser(payload.email);
+  async validate(payload: any): Promise<IResponseUser> {
+    const user = await this.userService.getUserInfor(payload.email);
     if (!user) throw new UnauthorizedException('Please log in to continue');
 
-    return this.authService.findUser(payload.email);
+    return user;
   }
 }
