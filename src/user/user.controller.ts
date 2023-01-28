@@ -1,7 +1,16 @@
-import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Post,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { UploadAvatarDto } from './dto/upload-avatar.dto';
 
 @Controller('user')
 @ApiTags('user')
@@ -10,7 +19,7 @@ export class UserController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(id);
+    return this.userService.getUserInfor(id);
   }
 
   @Patch(':id')
@@ -21,5 +30,10 @@ export class UserController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
+  }
+
+  @Post('/avatar')
+  async uploadAvatar(@Body() createAvatarDto: UploadAvatarDto) {
+    return this.userService.uploadAvatar(createAvatarDto);
   }
 }
